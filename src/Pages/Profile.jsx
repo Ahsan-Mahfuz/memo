@@ -3,7 +3,7 @@ import { Tabs } from 'antd'
 import { FaArrowLeft } from 'react-icons/fa'
 import PersonalDetails from '../components/Profile/PersonalDetails'
 import AccountDetails from '../components/Profile/AccountDetails'
-import ManageAccounts from '../components/Profile/ManageAccounts.JSX'
+import ManageAccounts from '../components/Profile/ManageAccounts'
 import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
