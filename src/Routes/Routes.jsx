@@ -11,7 +11,7 @@ import CategoryDetails from '../Pages/CategoryDetails'
 import Category from '../Pages/Category'
 import PayOnShop from '../Pages/PayOnShop'
 import Transaction from '../Pages/Transaction'
-import TermsConditions from '../Pages/Termsconditions'
+import TermsConditions from '../Pages/TermsConditions'
 import PrivacyPolicy from '../Pages/PrivacyPolicy'
 import RecentCustomers from '../Pages/RecentCustomers'
 // aa
