@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Tabs, Switch, Button, Spin, message } from 'antd'
 import { FaArrowLeft } from 'react-icons/fa'
-import PersonalDetails from '../components/ShopDetails/Personaldetails'
+import PersonalDetails from '../components/ShopDetails/PersonalDetails'
 import AccountDetails from '../components/ShopDetails/AccountDetails'
 import ShopServices from '../components/ShopDetails/ShopServices'
 import ShopStaff from '../components/ShopDetails/ShopStaff'
