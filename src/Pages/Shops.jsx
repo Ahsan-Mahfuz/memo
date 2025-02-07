@@ -25,6 +25,7 @@ const Shops = () => {
     status: status,
   })
 
+
   if (isLoading) {
     return (
       <div className="w-full flex justify-center items-center h-64">
@@ -140,8 +141,8 @@ const Shops = () => {
       'Not specified',
     contact: shop.phoneNumber || 'Not provided',
     status: shop.status,
-    image: shop.shopImages?.[0]
-      ? `${url}/${shop.shopImages}`
+    image: shop.shopImages && shop.shopImages[0]
+      ? `${url}/${shop.shopImages[0]}`
       : `https://cdn-icons-png.flaticon.com/512/149/149071.png`,
   }))
 

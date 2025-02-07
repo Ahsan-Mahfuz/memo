@@ -27,23 +27,41 @@ const Carousel = () => {
 
   const data = [
     {
-      icon: '€',
+      icon: (
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/11497/11497765.png"
+          alt="icon"
+          className="w-10 h-10 mx-auto "
+        />
+      ),
       title: 'Total sales',
-      value: `£${metaData?.data?.totalSales || 0}`,
-      change: `${
-        metaData?.data?.totalSalesChange == 'decrease' ? '↓' : '↑' || 0
-      } ${metaData?.data?.totalSalesChangePercentage}% vs last month`,
+      value: `£${metaData?.data?.totalSales.toFixed(2) || 0}`,
+      change: `${metaData?.data?.totalSalesChange == 'decrease' ? '↓' : '↑'} ${
+        metaData?.data?.totalSalesChangePercentage
+      }% vs last month`,
     },
     {
-      icon: '€',
+      icon: (
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/11497/11497765.png"
+          alt="icon"
+          className="w-10 h-10 mx-auto "
+        />
+      ),
       title: 'Profit on sales',
-      value: `£${metaData?.data?.totalProfit || 0}`,
+      value: `£${metaData?.data?.totalProfit.toFixed(2) || 0}`,
       change: `${
         metaData?.data?.totalProfitChangeType == 'decrease' ? '↓' : '↑'
       } ${metaData?.data?.totalProfitChangePercentage}% vs last month`,
     },
     {
-      icon: '🎁',
+      icon: (
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1057/1057317.png"
+          alt="icon"
+          className="w-10 h-10 mx-auto "
+        />
+      ),
       title: 'Total services',
       value: `${metaData?.data?.totalService || 0} services`,
       change: `${metaData?.data?.serviceChangeType == 'decrease' ? '↓' : '↑'} ${
@@ -52,7 +70,13 @@ const Carousel = () => {
     },
 
     {
-      icon: '📈',
+      icon: (
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/10033/10033281.png"
+          alt="icon"
+          className="w-10 h-10 mx-auto "
+        />
+      ),
       title: 'Total clients',
       value: `${metaData?.data?.totalClient || 0}`,
       change: `${metaData?.data?.clientChangeType == 'decrease' ? '↓' : '↑'} ${
@@ -60,7 +84,13 @@ const Carousel = () => {
       }% vs last month`,
     },
     {
-      icon: '📈',
+      icon: (
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1999/1999625.png"
+          alt="icon"
+          className="w-10 h-10 mx-auto "
+        />
+      ),
       title: 'Total Customers',
       value: `${metaData?.data?.totalCustomer || 0}`,
       change: `${

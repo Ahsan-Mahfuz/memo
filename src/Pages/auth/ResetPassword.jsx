@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 const ResetPassword = () => {
   const [reset] = useResetPasswordMutation()
+  console.log(reset)
   const onFinish = (values) => {
     values.email = localStorage.getItem('email')
     reset(values)

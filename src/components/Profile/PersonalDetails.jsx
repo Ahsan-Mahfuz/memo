@@ -31,6 +31,7 @@ const PersonalDetails = () => {
   const [name, setName] = useState('') // State for name
   const [image, setImage] = useState(null)
   const handleChange = (e) => {
+    console.log(e.target.files[0])
     const file = e.target.files[0]
     setImage(file)
     setProfileImage(file)

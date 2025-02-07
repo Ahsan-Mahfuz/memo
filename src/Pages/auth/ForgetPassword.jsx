@@ -1,15 +1,19 @@
 import { Form, Input, Button } from 'antd'
-import login from '../../assets/login.png' // Importing the login image
+import login from '../../assets/login.png'
+import { useState } from 'react'
 import {
   useForgetPasswordMutation,
   useVerifyResetOtpMutation,
 } from '../../Redux/authApis'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
+
 const ForgetPassword = () => {
   const [ForgetPass] = useForgetPasswordMutation()
   const [verify] = useVerifyResetOtpMutation()
   const navigate = useNavigate()
+  const [otp, setOtp] = useState(['', '', '', ''])
+
   const onFinish = (values) => {
     ForgetPass(values)
       .unwrap()
@@ -21,21 +25,37 @@ const ForgetPassword = () => {
         toast.error(err?.data?.message)
       })
   }
-  const onFinishOtp = (values) => {
-    toast.remove()
-    verify({
-      email: localStorage.getItem('email'),
-      resetCode: Number(values?.otp),
-    })
-      .unwrap()
-      .then((res) => {
-        // localStorage.removeItem('email')
-        toast.success(res.message)
-        navigate('/reset-password')
+
+  const handleOtpChange = (value, index) => {
+    const newOtp = [...otp]
+    newOtp[index] = value
+    setOtp(newOtp)
+
+    // Auto-focus next input
+    if (value && index < 3) {
+      document.getElementById(`otp-${index + 1}`).focus()
+    }
+  }
+
+  const onFinishOtp = () => {
+    const otpValue = otp.join('')
+    if (otpValue.length === 4) {
+      toast.remove()
+      verify({
+        email: localStorage.getItem('email'),
+        resetCode: Number(otpValue),
       })
-      .catch((err) => {
-        toast.error(err?.data?.message)
-      })
+        .unwrap()
+        .then((res) => {
+          toast.success(res.message)
+          navigate('/reset-password')
+        })
+        .catch((err) => {
+          toast.error(err?.data?.message)
+        })
+    } else {
+      toast.error('Please enter a valid 4-digit OTP!')
+    }
   }
 
   return (
@@ -45,8 +65,8 @@ const ForgetPassword = () => {
         <h1 className="text-3xl font-bold text-teal-600 mb-2">CARENS</h1>
         <p className="text-lg text-gray-700 mb-8">Reset password</p>
 
+        {/* Email Form */}
         <Form layout="vertical" onFinish={onFinish} className="w-full max-w-sm">
-          {/* Email Field */}
           <Form.Item
             name="email"
             rules={[
@@ -60,7 +80,6 @@ const ForgetPassword = () => {
             />
           </Form.Item>
 
-          {/* Send OTP Button */}
           <Form.Item>
             <Button
               disabled={localStorage.getItem('email')}
@@ -73,34 +92,26 @@ const ForgetPassword = () => {
           </Form.Item>
         </Form>
 
+        {/* OTP Verification Form */}
         <Form
           layout="vertical"
           onFinish={onFinishOtp}
           className="w-full max-w-sm"
         >
-          {/* OTP Input */}
-          <Form.Item
-            name="otp"
-            rules={[{ required: true, message: 'Please enter the OTP!' }]}
-          >
+          <Form.Item name="otp">
             <div className="flex gap-2">
-              <Input.OTP
-                length={4}
-                className="w-12 h-[42px] text-center border-gray-300 rounded-md"
-              />
-              {/* {Array(4)
-                .fill(0)
-                .map((_, index) => (
-                  <Input
-                    key={index}
-                    maxLength={1}
-                    className="w-12 h-[42px] text-center border-gray-300 rounded-md"
-                  />
-                ))} */}
+              {otp.map((_, index) => (
+                <Input
+                  key={index}
+                  id={`otp-${index}`}
+                  maxLength={1}
+                  className="w-12 h-[42px] text-center border-gray-300 rounded-md"
+                  onChange={(e) => handleOtpChange(e.target.value, index)}
+                />
+              ))}
             </div>
           </Form.Item>
 
-          {/* Next Button */}
           <Form.Item>
             <Button
               type="primary"

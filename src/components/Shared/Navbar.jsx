@@ -16,8 +16,8 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false)
   const { data: profileData } = useGetProfileInformationQuery()
 
-  const [notifications, setNotifications] = useState([]) // Store notifications locally
-  const [notificationComing, setNotificationComing] = useState('') // Store notifications locally
+  const [notifications, setNotifications] = useState([]) 
+  const [notificationComing, setNotificationComing] = useState('') 
   const [currentPage, setCurrentPage] = useState(1)
   const { socket } = useSocket()
 
@@ -30,17 +30,15 @@ const Navbar = () => {
     page: currentPage,
     limit: 5,
   })
+  // console.log(notificationsData);
   const [readAllNotification] = useReadAllNotificationsMutation()
 
-  // Update the notifications state when the data is fetched
   useEffect(() => {
-    console.log(socket);
     if (notificationsData?.data?.result) {
-      setNotifications(notificationsData?.data?.result) // Safely set the notifications if they exist
+      setNotifications(notificationsData?.data?.result) 
       setNotificationComing(notificationsData?.data?.unseenNotificationCount)
     }
     if (socket) {
-      // Listen for incoming notifications
       socket.on('admin-notification', (notification) => {
         setNotificationComing(notification)
         setNotifications(notificationsData?.data?.result)
@@ -90,7 +88,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Notifications List */}
         <div className="p-4">
           {notifications.length > 0 ? (
             notifications.map((notification) => (

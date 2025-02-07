@@ -1,4 +1,3 @@
-// src/context/SocketContext.jsx
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import { url } from '../../Redux/server'
@@ -17,8 +16,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null)
   const [onlineUser, setOnlineUser] = useState([])
   const [id, setId] = useState('')
-  console.log(onlineUser)
-
+  
   useEffect(() => {
     const savedToken = localStorage.getItem('token')
     if (savedToken === null) return
@@ -41,7 +39,7 @@ export const SocketProvider = ({ children }) => {
       setOnlineUser(data)
     })
 
-    setSocket(socketConnection) //okk
+    setSocket(socketConnection)
 
     return () => {
       socketConnection.disconnect()
