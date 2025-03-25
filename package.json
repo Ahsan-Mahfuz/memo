@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "antd": "^5.22.1",
     "jodit-react": "^4.1.2",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
